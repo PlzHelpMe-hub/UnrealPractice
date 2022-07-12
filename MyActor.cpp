@@ -38,6 +38,17 @@ void AMyActor::PostInitProperties()
 	CalculateValues();
 }
 
+float AMyActor::FunctionTest01()
+{
+	return 1.0f;
+}
+
+float AMyActor::FunctionTest02(float FValue)
+{
+	return 0.0f + FValue;
+}
+
+
 #if WITH_EDITOR
 void AMyActor::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) //아래 코드는 에디터에서 변해가는 파생된 값의 계산에 필요한 후크 추가를 나타냄
 {

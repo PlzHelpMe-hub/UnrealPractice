@@ -17,8 +17,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Damage")
 		float DamageTimeInSeconds;
 
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Transient, Category = "Damage")
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Transient, Category = "Damage")
 		float DamagePerSecond;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = " Variable")
+		bool BoolTest;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = " Variable")
+		class UStaticMeshComponent* m_Mesh;
 	
 public:	
 	// Sets default values for this actor's properties
@@ -41,4 +47,34 @@ public:
 	//UFUNCTION(BlueprintNativeEvent, Category = "Damage") //블루프린트가 메서드를 덮어쓸 수 있도록 하면서도 C++ 기본 구현을 제공
 
 	void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent);
+
+	UFUNCTION(BlueprintCallable, Category = "FunctionTest")
+	float FunctionTest01();
+
+	UFUNCTION(BlueprintCallable, Category = "FunctionTest")
+	float FunctionTest02(float FValue);
+
+	UFUNCTION(BlueprintPure, Category = "FunctionTest")
+	float FunctionTest03withUPARAM(FVector VecRef, FVector VecIn)
+	{
+		float fDistance = FVector::Distance(VecRef, VecIn);
+		VecRef = FVector::ZeroVector;
+		return fDistance;
+	}
+
+	UPROPERTY(BlueprintReadWrite, Category = "FunctionTest")
+		float m_TestValue = 3.0f;
+
+	UFUNCTION(BlueprintCallable, Category = "FunctionTest")
+		float GetterTest()
+	{
+		return m_TestValue + 30.0f;
+	}
+
+	UFUNCTION(BlueprintCallable, Category = "FunctionTest")
+		float SetterTest(float Value)
+	{
+		return Value + 100.0f;
+	}
+
 };
